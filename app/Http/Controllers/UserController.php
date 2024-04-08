@@ -32,10 +32,13 @@ class UserController extends Controller
         $token = $user
             ->createToken('Personal Access Token')->plainTextToken;
 
-        return response()->json([
-            'message' => 'Successfully created user!',
-            'accessToken' => $token,
-        ], 201);
+        return response()->json(
+            [
+                'message' => 'Successfully created user!',
+                'accessToken' => $token,
+            ],
+            201
+        );
     }
     public function login(Request $request)
     {
@@ -46,9 +49,7 @@ class UserController extends Controller
 
         if (!Auth::attempt($loginUserData)) {
             return response()->json(
-                [
-                    'message' => 'Unable to auth'
-                ],
+                ['message' => 'Unable to auth'],
                 400
             );
         }
