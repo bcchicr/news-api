@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\AdminMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +17,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::controller(UserController::class)->group(function () {
+    Route::post('register', 'register');
+    Route::post('login', 'login');
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('logout', 'logout');
+    });
 });
+
+Route::controller(NewsController::class)
+    ->middleware('auth:sanctum')
+    ->group(function () {
+        Route::get('news', 'index');
+        Route::get('news/{news}', 'show');
+
+        Route::middleware(AdminMiddleware::class)->group(function () {
+            Route::post('news', 'store');
+            Route::patch('news/{news}', 'update');
+            Route::delete('news/{news}', 'destroy');
+        });
+    });
