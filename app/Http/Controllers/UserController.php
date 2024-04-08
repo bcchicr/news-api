@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\LoginUserRequest;
 use App\Http\Requests\User\RegisterUserRequest;
-use App\Models\User;
 use App\Services\UserService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -40,9 +38,8 @@ class UserController extends Controller
                 400
             );
         }
-        $token = Auth::user()
-            ->createToken()
-            ->plainTextToken;
+
+        $token = Auth::user()->getToken();
         return response()->json(
             [
                 'accessToken' => $token,

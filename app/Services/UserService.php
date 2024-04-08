@@ -29,8 +29,8 @@ final class UserService
         LoginUserDTO $request
     ): bool {
         return Auth::attempt([
-            $request->email,
-            $request->password
+            'email' => $request->email,
+            'password' => $request->password
         ]);
     }
 }
