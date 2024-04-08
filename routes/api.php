@@ -20,10 +20,6 @@ use App\Http\Middleware\AdminMiddleware;
 Route::controller(UserController::class)->group(function () {
     Route::post('register', 'register');
     Route::post('login', 'login');
-
-    Route::middleware('auth:sanctum')->group(function () {
-        Route::post('logout', 'logout');
-    });
 });
 
 Route::controller(NewsController::class)
