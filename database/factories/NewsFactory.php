@@ -32,7 +32,7 @@ class NewsFactory extends Factory
     public function delayed(): static
     {
         return $this->state(fn (array $attributes) => [
-            'published_at' => date('Y-m-d H:i:s', strtotime('+1 hours'))
+            'published_at' => date('Y-m-d H:i:s', strtotime('+10 minutes'))
         ]);
     }
 }

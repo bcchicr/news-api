@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->role === UserRole::ADMIN;
     }
+
+    public function getToken(): string
+    {
+        return $this->createToken('Personal Access Token')->plainTextToken;
+    }
 }
