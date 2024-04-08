@@ -1,0 +1,3 @@
+[submodule "docker-php-env"]
+	path = docker-php-env
+	url = https://github.com/bcchicr/docker-php-env.git
